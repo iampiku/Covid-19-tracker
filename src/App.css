@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+}
+
+body {
+  background-color: #f3d2c1;
+}
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.app__left {
+  flex: 0.7;
+}
+
+.app__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.graph > h3 {
+  text-align: center;
+  padding-top: 45px;
+  font-size: larger;
+}
+
+.table__heading {
+  font-size: larger;
+  text-align: center;
+  padding-top: 25px;
+}
+
+.app__stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 990px ) {
+  .app {
+    flex-direction: column;
+  }
+}
