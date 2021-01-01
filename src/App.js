@@ -33,6 +33,7 @@ const App = () => {
 	const [mapZoom, setMapZoom] = useState(3.8);
 	const [mapCountries, setMapCountries] = useState([]);
 
+	// getting world wide covid cases;
 	useEffect(() => {
 		fetch('https://disease.sh/v3/covid-19/all')
 			.then((responce) => responce.json())
@@ -41,6 +42,7 @@ const App = () => {
 			});
 	}, []);
 
+	// fetching country name and cases;
 	useEffect(() => {
 		const getCountriesData = async () => {
 			await fetch('https://disease.sh/v3/covid-19/countries')
@@ -66,16 +68,15 @@ const App = () => {
 		const apiUrl =
 			countryCode === 'worldwide'
 				? 'https://disease.sh/v3/covid-19/all'
-				: `https://disease.sh/v3/covid-19/countries/${countryCode}?strict=true`;
+				: `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
 		fetch(apiUrl)
 			.then((response) => response.json())
 			.then((data) => {
 				setDefaultOption(countryCode);
 				setCountryInfo(data);
-				console.log(data);
 				setMapCoordinates([data.countryInfo.lat, data.countryInfo.long]);
-				setMapZoom(4);
+				setMapZoom(3.2);
 			});
 	};
 
@@ -92,7 +93,9 @@ const App = () => {
 							value={defaultOption}>
 							<MenuItem value='worldwide'>World Wide 🌍</MenuItem>
 							{countries.map((country) => (
-								<MenuItem value={country.value}>{country.name}</MenuItem>
+								<MenuItem key={country.value} value={country.value}>
+									{country.name}
+								</MenuItem>
 							))}
 						</Select>
 					</FormControl>
@@ -101,7 +104,7 @@ const App = () => {
 					<StatsBox
 						active={casesType === 'cases'}
 						onClick={() => setCasesType('cases')}
-						title='Covid Cases 🤕'
+						title='Covid Cases 😷'
 						cases={countryInfo.todayCases}
 						total={countryInfo.cases}
 					/>

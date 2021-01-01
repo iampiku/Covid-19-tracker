@@ -4,11 +4,13 @@ import { Circle, Popup } from 'react-leaflet';
 
 import './Popup.css';
 
+// sorting function;
 export const sortData = (data) => {
 	const sortedData = [...data];
 	return sortedData.sort((a, b) => (a.cases > b.cases ? -1 : 1));
 };
 
+// defining circle color;
 const circleColour = {
 	cases: {
 		hex: '#CC1034',
@@ -24,6 +26,7 @@ const circleColour = {
 	},
 };
 
+// building circle popups on the map with respect to cases, recoverd & deaths;
 export const circleMap = (data, casesType) =>
 	data.map((country) => (
 		<Circle
@@ -56,5 +59,6 @@ export const circleMap = (data, casesType) =>
 		</Circle>
 	));
 
+// formating numeraical data using numeral for better data representation;
 export const formatStats = (stat) =>
 	stat ? `+${numeral(stat).format('0.0a')}` : '+0';

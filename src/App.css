@@ -16,6 +16,10 @@ body {
   flex: 0.7;
 }
 
+.app__rigth {
+  padding-top: 35px;
+}
+
 .app__header {
   display: flex;
   align-items: center;

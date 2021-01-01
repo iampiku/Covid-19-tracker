@@ -1,10 +1,9 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
-import CountUp from 'react-countup';
 import React from 'react';
 import { formatStats } from '../utils';
 import './StatsBox.css';
 
-const statsBox = ({ title, cases, active, total, ...props }) => {
+const StatsBox = ({ title, cases, active, total, ...props }) => {
 	return (
 		<Card
 			onClick={props.onClick}
@@ -14,9 +13,7 @@ const statsBox = ({ title, cases, active, total, ...props }) => {
 				<Typography className='infoBox__total'>
 					<strong>{title}</strong>
 				</Typography>
-				<div className='infoBox__cases'>
-					<CountUp end={cases} duration='2' />
-				</div>
+				<div className='infoBox__cases'>{cases}</div>
 				<Typography className='infoBox__total' color='textPrimary'>
 					Total : {formatStats(total)}
 				</Typography>
@@ -25,4 +22,4 @@ const statsBox = ({ title, cases, active, total, ...props }) => {
 	);
 };
 
-export default statsBox;
+export default StatsBox;
