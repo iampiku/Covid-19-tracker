@@ -1,9 +1,3 @@
-.info-box {
-  flex: 1;
-  margin-right: 15px;
-  margin-bottom: 12px;
-}
-
 .info-box-active {
   border-bottom: 10px solid #f582ae;
 }
