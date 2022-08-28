@@ -36,7 +36,7 @@ const App = () => {
 	// getting world wide covid cases;
 	useEffect(() => {
 		fetch('https://disease.sh/v3/covid-19/all')
-			.then((responce) => responce.json())
+			.then((response) => response.json())
 			.then((data) => {
 				setCountryInfo(data);
 			});
@@ -44,18 +44,17 @@ const App = () => {
 
 	// fetching country name and cases;
 	useEffect(() => {
-		const getCountriesData = async () => {
-			await fetch('https://disease.sh/v3/covid-19/countries')
+		const getCountriesData = () => {
+			fetch('https://disease.sh/v3/covid-19/countries')
 				.then((response) => response.json())
 				.then((data) => {
-					const countries = data.map((i) => ({
+					const countriesData = data.map((i) => ({
 						name: i.country,
 						value: i.countryInfo.iso2,
 					}));
-					const sortedCountries = sortData(data);
-					setTableData(sortedCountries);
-					setCountries(countries);
 					setMapCountries(data);
+					setTableData(sortData(data));
+					setCountries(countriesData);
 				});
 		};
 		getCountriesData();
@@ -75,7 +74,10 @@ const App = () => {
 			.then((data) => {
 				setDefaultOption(countryCode);
 				setCountryInfo(data);
-				setMapCoordinates([data.countryInfo.lat, data.countryInfo.long]);
+				setMapCoordinates([
+					data.countryInfo.lat,
+					data.countryInfo.long,
+				]);
 				setMapZoom(3.2);
 			});
 	};
@@ -92,9 +94,9 @@ const App = () => {
 							variant='outlined'
 							value={defaultOption}>
 							<MenuItem value='worldwide'>World Wide 🌍</MenuItem>
-							{countries.map((country) => (
-								<MenuItem key={country.value} value={country.value}>
-									{country.name}
+							{countries.map(({ value, name }) => (
+								<MenuItem key={value} value={value}>
+									{name}
 								</MenuItem>
 							))}
 						</Select>
@@ -131,7 +133,7 @@ const App = () => {
 				/>
 			</div>
 
-			<div className='app__rigth'>
+			<div className='app__right'>
 				<Card style={{ backgroundColor: '#fef6e4' }}>
 					<CardContent>
 						<div className='table__heading'>

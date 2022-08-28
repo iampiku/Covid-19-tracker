@@ -11,7 +11,7 @@ const options = {
 			radius: 0,
 		},
 	},
-	maintainAspectRatio: false,
+	maintainAspectRatio: true,
 	tooltips: {
 		mode: 'index',
 		intersect: false,
@@ -65,7 +65,9 @@ function Graph({ casesType }) {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+			await fetch(
+				'https://disease.sh/v3/covid-19/historical/all?lastdays=120'
+			)
 				.then((response) => {
 					return response.json();
 				})
